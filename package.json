@@ -1,6 +1,6 @@
 {
-  "name": "A LANDSLIDE HAS OCCURRED",
-  "version": "1.0.2",
+  "name": "landslides",
+  "version": "1.0.3",
   "description": "Click the sandwich for instant landslides!",
   "main": "index.html",
   "scripts": {
@@ -29,6 +29,7 @@
     "grunt-contrib-cssmin": "^0.8.0",
     "grunt-contrib-csslint": "~0.2.0",
     "grunt-dev-update": "^0.4.6",
-    "grunt-htmlhint": "~0.4.0"
+    "grunt-htmlhint": "~0.4.0",
+    "grunt-contrib-watch": "^0.5.3"
   }
 }
