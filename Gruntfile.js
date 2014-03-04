@@ -22,6 +22,18 @@ module.exports = function(grunt) {
             }
         },
 
+        // Copy JavaScript dependencies to the proper location
+        copy: {
+            main: {
+                expand: true,
+                cwd: "node_modules/",
+                src: "jquery.runner/build/*-min.js",
+                dest: "js/",
+                flatten: true,
+                filter: "isFile"
+            },
+        },
+
         // Lint the HTML using HTMLHint
         htmlhint: {
             html: {
