@@ -13,7 +13,7 @@
     "use strict";
     /* One-time page load processes */
 
-    var LANDSLIDEfile,
+    var IamChief,
         a = document.createElement("audio");
 
     // Initialize stopwatch
@@ -22,35 +22,53 @@
     // Test HTML5 audio compatibility, preferring MP3 audio
     // Taken from http://diveintohtml5.info/everything.html#audio-mp3
     if (!!(a.canPlayType && a.canPlayType("audio/mpeg;").replace(/no/, ""))) {
-        LANDSLIDEfile = "audio/landslide.mp3";
+        IamChief = "audio/landslide.mp3";
     } else {
-        LANDSLIDEfile = "audio/landslide.ogg";
+        IamChief = "audio/landslide.ogg";
     }
 
-    // Export `LANDSLIDEfile` for use in other functions
-    window.LANDSLIDEfile = LANDSLIDEfile;
+    // Export any variables for use in other functions
+    window.IamChief = IamChief;
 })();
 
 $("#sandwich").on("click", function() {
     "use strict";
-    /* Trigger a landslide */
+    /* Trigger new landslides with each click of the sandwich */
 
-    var time = 0,
-        // Create a new audio event
-        LANDSLIDE = new Audio(LANDSLIDEfile);
+    // On click, fire an event to load a new player.
+    // Not firing the event ends up triggering two landslides on the first click,
+    // which is not what needs to happen.
+    $("#sandwich").trigger("a-new-landslide-has-occurred");
 
-    // Chief announces a landslide has occured
-    LANDSLIDE.play();
+    // Now that the initial landslide has occurred, make that one
+    // trigger new landslides (DOMINO EFFECT! :D)
+    $("#sandwich").bind("a-landslide-has-occurred", function() {
+        var dominoLandslide = new Audio(IamChief);
+        dominoLandslide.loop = true;
+        dominoLandslide.play();
+    });
 
-    // Once Chief finishes the announcement...
-    LANDSLIDE.addEventListener("ended", function() {
-        // ...he announces a landslide has occured... yet again...
-        LANDSLIDE.play();
-    }, false);
+    // On each subsequent click of the sandwich, trigger a new landslide
+    $("#sandwich").bind("a-new-landslide-has-occurred", function() {
+        var newLandslide = new Audio(IamChief);
+        newLandslide.loop = true;
+        newLandslide.play();
+    });
 });
 
 $("#sandwich").one("click", function() {
     "use strict";
-    /* Do not reset stopwatch with multiple occuring landslides */
+
+    // Do not reset stopwatch with multiple occuring landslides
     $("#timer").runner("start");
+
+    // Play inital audio clip
+    var firstLandslide = new Audio(IamChief);
+    firstLandslide.load();
+    firstLandslide.play();
+
+    // Fire event when finished to trigger loop
+    $(firstLandslide).bind("ended", function() {
+        $("#sandwich").trigger("a-landslide-has-occurred");
+    });
 });
