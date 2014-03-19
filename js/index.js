@@ -1,12 +1,12 @@
 /*
-    Created 2014 Triangle717
-    <http://Triangle717.WordPress.com/>
+  Created 2014 Triangle717
+  <http://Triangle717.WordPress.com/>
 
-    Source code licensed under The MIT License
-    <http://opensource.org/licenses/MIT/>
+  Source code licensed under The MIT License
+  <http://opensource.org/licenses/MIT/>
 
-    Dedicated to the good folks at Rock Raiders United
-    <http://www.rockraidersunited.org/>
+  Dedicated to the good folks at Rock Raiders United
+  <http://www.rockraidersunited.org/>
 */
 
 (function(){
