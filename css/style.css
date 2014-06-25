@@ -9,9 +9,17 @@
   <http://www.rockraidersunited.org/>
 */
 
+::-moz-selection {
+  text-shadow: none;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+::selection {
+  text-shadow: none;
+  background-color: rgba(0, 0, 0, 0.7);
+}
 
 /* ------- Begin sandwich sizing for various screen sizes ------- */
-
 
 @media screen and (max-width: 670px) {
   #sandwich {
@@ -162,7 +170,8 @@
   padding: 0 10px 0 5px;
   border: 2px solid gray;
   background-color: #c7c7c7;
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
+  -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
+          box-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
   z-index: -1;
 }
 
