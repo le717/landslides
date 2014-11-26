@@ -6,13 +6,15 @@
   <meta name="title" content="A LANDSLIDE HAS OCCURRED">
   <meta name="description" content="Click the sandwich for instant landslides!">
   <meta name="keywords" content="Triangle717, le717, LEGO Rock Raiders, Rock Raiders, Rock Raiders United, A LANDSLIDE HAS OCCURRED">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon.png">
   <link rel="apple-touch-icon-precomposed" sizes="152x152" href="apple-touch-icon-precomposed.png">
   <link rel="shortcut icon" href="favicon.png">
   <title>A LANDSLIDE HAS OCCURRED</title>
-  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Poller+One">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Poller+One|Roboto:400">
   <link rel="stylesheet" href="css/style.min.css">
-  
+
   <!--
     Created 2014 Triangle717
     <http://Triangle717.WordPress.com/>
@@ -26,20 +28,23 @@
 </head>
 
 <body>
-  <h1>A LANDSLIDE HAS OCCURRED</h1>
-  <p>Click for instant landslides!</p><br>
-  <div class="sandwich"></div><br>
-  <p class="footer">
-      2014 <a target="_blank" href="http://Triangle717.WordPress.com/">Triangle717</a><br>
-      Sandwich by <a target="_blank" href="http://www.behance.net/eyebrowse">Eyebrowse</a><br>
-      This has been your local Chief's annoyance for the day<br>
-      <p id="timer-para">
-          You have withstood landslides for<br><span id="timer-wrapper"><span id="timer"></span></span>
-      </p>
-  </p>
+  <header style="text-align: center;">
+    <h1>A LANDSLIDE HAS OCCURRED</h1>
+    <h3>Click for instant landslides!</h3>
+  </header>
 
-  <script src="js/jquery-1.11.1.min.js"></script>
-  <script src="js/jquery.runner-min.js"></script>
+  <img class="sandwich block-center img-responsive" alt="Sandwich" width="700" height="450" src="img/sandwich.png">
+
+  <div class="footer">
+    <p>2014 <a target="_blank" href="http://Triangle717.WordPress.com/">Triangle717</a><br>
+    Sandwich by <a target="_blank" href="http://www.behance.net/eyebrowse">Eyebrowse</a></p>
+
+    <p id="timer-para">You have withstood landslides for<br>
+      <span id="timer-wrapper"><span id="timer"></span></span></p>
+  </div>
+
+  <script src="lib/jquery-1.11.1.min.js"></script>
+  <script src="lib/jquery.runner-min.js"></script>
   <script src="js/index.min.js"></script>
 </body>
 </html>

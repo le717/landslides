@@ -1,117 +1,103 @@
 module.exports = function(grunt) {
-    "use strict";
-    // Project configuration
-    grunt.initConfig({
-        pkg: grunt.file.readJSON("package.json"),
-        banner: '/* <%= pkg.name %> - v<%= pkg.version %>\n' +
-      '<%= pkg.homepage ? "" + pkg.homepage + "\\n" : "" %>' +
-      'Created <%= grunt.template.today("yyyy") %> <%= pkg.author %>; ' +
-      'Licensed under the <%= _.pluck(pkg.licenses, "type").join(", ") %>\n*/\n',
-        cssfiles: ["css/*.css", "!css/*.min.css"],
-        jsfiles: ["js/*.js", "!js/*min.js"],
+  "use strict";
+  grunt.initConfig({
+    pkg: grunt.file.readJSON("package.json"),
+    banner: '/* <%= pkg.name %> - v<%= pkg.version %>\n' +
+    '<%= pkg.homepage ? "" + pkg.homepage + "\\n" : "" %>' +
+    'Created <%= grunt.template.today("yyyy") %> <%= pkg.author %>; ' +
+    'Licensed under the <%= _.pluck(pkg.licenses, "type").join(", ") %>\n*/\n',
+    cssfiles: ["css/*.css", "!css/*.min.css"],
+    jsfiles: ["js/*.js", "!js/*min.js"],
 
-        // Keep the devDependencies up-to-date
-        devUpdate: {
-            main: {
-                options: {
-                    // Do not mention already updated dependencies
-                    reportUpdated: false,
-                    // Prompt asking if the dependency should be updated
-                    updateType : "prompt"
-                }
-            }
-        },
-
-        // Copy JavaScript dependencies to the proper location
-        copy: {
-            main: {
-                expand: true,
-                cwd: "node_modules/",
-                src: "jquery.runner/build/*-min.js",
-                dest: "js/",
-                flatten: true,
-                filter: "isFile"
-            },
-        },
-
-        // Lint the HTML using HTMLHint
-        htmlhint: {
-            html: {
-                options: {
-                    "tag-pair": true,
-                },
-                src: ["index.html"]
-            }
-        },
-
-        // Lint the CSS using CSS Lint
-        csslint: {
-            strict: {
-                options: {
-                    csslintrc: ".csslintrc",
-                    "import": 2
-                },
-                src: "<%= cssfiles %>",
-            }
-        },
-
-        // Minify any CSS using CSSMin
-        cssmin: {
-            add_banner: {
-                options: {
-                    banner: "<%= banner %>"
-                },
-                files: {
-                    "css/style.min.css": "<%= cssfiles %>"
-                }
-            }
-        },
-
-        // Lint the JavaScript using JSHint
-        jshint: {
-            src: {
-                options: {
-                    jshintrc: ".jshintrc"
-                },
-                src: "<%= jsfiles %>",
-            },
-        },
-
-        // Minify any JavaScript using Uglify
-        uglify: {
-            options: {
-                banner: "<%= banner %>"
-            },
-            my_target: {
-                files: {
-                    "js/index.min.js": "<%= jsfiles %>",
-                }
-            }
-        },
-
-        // Watched files to trigger grunt
-        watch: {
-            files: ["Gruntfile.js", "<%= cssfiles %>", "<%= jsfiles %>"],
-            tasks: ["all"]
+    devUpdate: {
+      main: {
+        options: {
+          // Do not mention already updated dependencies
+          reportUpdated: false,
+          // Prompt asking if the dependency should be updated
+          updateType : "prompt"
         }
-    });
+      }
+    },
 
-    // Load all the plugins required to perform our tasks
-    require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+    copy: {
+      main: {
+        expand: true,
+        cwd: "node_modules/",
+        src: "jquery.runner/build/*-min.js",
+        dest: "js/",
+        flatten: true,
+        filter: "isFile"
+      },
+    },
 
-    grunt.registerTask('default', 'List commands', function () {
-        grunt.log.writeln("");
-        grunt.log.writeln('Run "grunt lint" to lint the source files');
-        grunt.log.writeln('Run "grunt build" to minify the source files');
-        grunt.log.writeln('Run "grunt devUpdate" to update the devDependencies');
-        grunt.log.writeln('Run "grunt all" to run all tasks except "devUpdate"');
-    });
+    htmlhint: {
+      html: {
+        options: {
+          "tag-pair": true,
+        },
+        src: ["index.html"]
+      }
+    },
 
-    // Define the tasks
-    grunt.registerTask("lint", ["htmlhint", "csslint", "jshint"]);
-    grunt.registerTask("build", ["cssmin", "uglify"]);
-    grunt.registerTask("all", ["lint", "build"]);
+    csslint: {
+      strict: {
+        options: {
+          csslintrc: ".csslintrc",
+          "import": 2
+        },
+        src: "<%= cssfiles %>",
+      }
+    },
 
-    // Always use --force to stop csslint from killing the task
-    grunt.option("force", true);
+    cssmin: {
+      add_banner: {
+        options: {
+          banner: "<%= banner %>"
+        },
+        files: {
+          "css/style.min.css": "<%= cssfiles %>"
+        }
+      }
+    },
+
+    jshint: {
+      src: {
+        options: {
+          jshintrc: ".jshintrc"
+        },
+        src: "<%= jsfiles %>",
+      },
+    },
+
+    uglify: {
+      options: {
+        banner: "<%= banner %>"
+      },
+      my_target: {
+        files: {
+          "js/index.min.js": "<%= jsfiles %>",
+        }
+      }
+    },
+
+    watch: {
+      files: ["Gruntfile.js", "<%= cssfiles %>", "<%= jsfiles %>"],
+      tasks: ["all"]
+    }
+  });
+
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+  grunt.registerTask('default', 'List commands', function () {
+    grunt.log.writeln("");
+    grunt.log.writeln('Run "grunt lint" to lint the source files');
+    grunt.log.writeln('Run "grunt build" to minify the source files');
+    grunt.log.writeln('Run "grunt devUpdate" to update the devDependencies');
+    grunt.log.writeln('Run "grunt all" to run all tasks except "devUpdate"');
+  });
+
+  grunt.registerTask("lint", ["htmlhint", "csslint", "jshint"]);
+  grunt.registerTask("build", ["cssmin", "uglify"]);
+  grunt.registerTask("all", ["lint", "build"]);
+  grunt.option("force", true);
 };
